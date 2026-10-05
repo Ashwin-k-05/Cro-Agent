@@ -15,8 +15,8 @@
 
 | Resource | Link |
 |---|---|
-| 🌐 **Live Deployed App** | [https://your-deployed-app.vercel.app](https://your-deployed-app.vercel.app) *(Replace with your Vercel URL)* |
-| 🎥 **Demo Video Walkthrough** | [Watch Demo Video (Loom / YouTube)](https://your-video-link-here.com) *(Replace with your video URL)* |
+| 🌐 **Live Deployed App** | [https://cro-agent-indol.vercel.app/](https://cro-agent-indol.vercel.app/)  |
+| 🎥 **Demo Video Walkthrough** | [Watch Demo Video (Loom / YouTube)](https://your-video-link-here.com)  |
 
 ## 1. Project Overview
 
