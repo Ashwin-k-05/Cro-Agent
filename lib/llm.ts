@@ -263,7 +263,7 @@ export async function runCroAnalysis(scraped: ScrapedPage): Promise<CroAudit> {
 
   // 1. Try Google Gemini if key is available
   if (geminiKey) {
-    const candidateModels = ["gemini-2.5-flash", "gemini-flash-latest", "gemini-1.5-flash"];
+    const candidateModels = ["gemini-2.0-flash", "gemini-1.5-flash", "gemini-1.5-pro"];
     const genAI = new GoogleGenerativeAI(geminiKey);
     const prompt = buildCroUserPrompt(scraped);
 

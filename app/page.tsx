@@ -41,7 +41,24 @@ export default function HomePage() {
         body: JSON.stringify({ url: targetUrl }),
       });
 
-      const data: AuditApiResponse = await response.json();
+      const rawText = await response.text();
+      let data: AuditApiResponse;
+
+      try {
+        data = JSON.parse(rawText);
+      } catch {
+        // Non-JSON response (usually Vercel 504 Gateway Timeout or 500 Function Crash)
+        if (response.status === 504 || rawText.toLowerCase().includes("timeout")) {
+          throw new Error(
+            "The audit timed out. Vercel's serverless time limit was reached while fetching the website or running AI analysis. Try a faster URL or a different page."
+          );
+        }
+        throw new Error(
+          rawText.length > 0 && rawText.length < 200
+            ? rawText.trim()
+            : `Server returned status ${response.status}. Please check your Vercel deployment logs.`
+        );
+      }
 
       if (!response.ok || !data.success || !data.audit) {
         throw new Error(
