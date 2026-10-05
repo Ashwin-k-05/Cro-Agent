@@ -15,7 +15,9 @@
 
 The **AI Landing Page CRO Agent** allows users to enter any publicly accessible URL such as a Shopify product page or marketing landing page and receive an institutional-quality CRO audit in seconds.
 
-The system programmatically fetches the webpage HTML. It extracts DOM semantics, structured JSON-LD schemas, Shopify product data, trust markers, forms and call-to-actions. This data is then synthesized into a structured prompt for advanced reasoning models such as Claude 3.5 Sonnet or GPT-4o.
+The system programmatically fetches the webpage HTML and extracts DOM semantics. It also extracts structured JSON-LD schemas, Shopify product data, trust markers, forms and call-to-actions.
+
+This data is then synthesized into a structured prompt for advanced reasoning models such as Claude 3.5 Sonnet, GPT-4o or Gemini.
 
 The resulting output is strictly validated with Zod and rendered as an interactive executive SaaS dashboard.
 
@@ -23,71 +25,210 @@ The dashboard includes:
 
 - Calibrated 0–100 CRO benchmark score
 - 6 conversion pillar evaluations
-- Identified conversion friction points and drop-off risks
-- Prioritized recommendations with impact and effort ratings
-- High-converting AI copy rewrites with one-click copy
-- Instant PDF report export
+- Hero section evaluation
+- CTA quality evaluation
+- Trust signal evaluation
+- Product page evaluation
+- Mobile UX evaluation
+- Copy clarity evaluation
+- Conversion friction points
+- Drop-off risk identification
+- Prioritized recommendations
+- Quick wins
+- AI-generated copy improvements
+- One-click copy functionality
+- PDF report export
 
-The application operates completely **stateless without a database**. This makes it lightweight and easy to deploy to Vercel or any modern edge runtime.
+The application operates completely **stateless without a database**.
 
----
-
-## 2. Features
-
-- **Automated Webpage Scraper & DOM Extractor**: High-speed Cheerio scraper extracts H1 H2 and H3 headings. It also extracts meta tags, button CTAs, navigation links, alt attributes, form elements and structured JSON-LD data.
-- **E-Commerce & Shopify Intelligence**: Automatically identifies Shopify stores, product titles, regular and discounted pricing, inventory availability, shipping notices and trust badges.
-- **Calibrated 0–100 CRO Scoring Engine**: Computes benchmark scores across five performance tiers: *Critical, Needs Improvement, Good, Strong and Excellent*.
-- **Hero Section Analysis**: Diagnoses value proposition immediacy, competitive differentiation and headline resonance above the fold.
-- **CTA Quality Audit**: Evaluates visual prominence, button copy psychology and competing action noise.
-- **Trust & Proof Signals**: Identifies verified reviews, guarantees, SSL indicators and social proof.
-- **Product Page Diagnostic**: Identifies pricing anchors, specification overload and risk-reversal gaps.
-- **Mobile UX Observations**: Evaluates structural density, mobile layout signals, viewport declarations and vertical scroll barriers.
-- **Copy Clarity & Tone**: Inspects readability, feature-vs-benefit orientation and customer-focused messaging.
-- **Friction Points Matrix**: Classifies friction points with severity badges: *High, Medium and Low*. Includes interactive filtering.
-- **Prioritized Recommendations Roadmap**: Categorizes recommendations based on expected conversion uplift and engineering complexity.
-- **Quick Wins**: Highlights low-effort optimizations that can provide immediate improvements.
-- **AI Copy Variations**: Generates alternative hero headlines, value statements and 3 CTA psychology angles: Direct, Value-First and Risk-Reversal.
-- **PDF Report Generation**: Provides client-side print and PDF export with clean print typography using `react-to-print`.
-- **Zero-Config Demoability**: A built-in context-aware heuristic analyzer automatically activates when no external LLM API key is configured. This guarantees full end-to-end functionality out of the box.
+This makes it lightweight and easy to deploy to Vercel or any modern edge runtime.
 
 ---
 
-## 3. Architecture
+# 2. Features
 
-```text
-User Enters URL
-      │
-      ▼
-Next.js App Router (Frontend Dashboard)
-      │
-      ▼ (POST /api/audit)
-Next.js Serverless Route Handler
-      │
-      ▼
-Native Fetch + Cheerio Web Scraper
- ├── Extracts Headings (H1/H2/H3)
- ├── Extracts Buttons & CTAs
- ├── Parses Schema.org / JSON-LD
- ├── Detects Shopify Signals & Trust Markers
- └── Computes Structural Signals (Word count, Alt tags, Viewport)
-      │
-      ▼
-Structured Page Context
-      │
-      ▼
-LLM Orchestrator (`lib/llm.ts`)
- ├── Primary: Anthropic Claude 3.5 Sonnet
- ├── Fallback: OpenAI GPT-4o
- └── Fallback: Context-Aware CRO Analyzer Engine
-      │
-      ▼
-JSON Extraction & Normalization
-      │
-      ▼
-Zod Schema Validation (`croAuditSchema`)
-      │
-      ▼
-Validated CRO Audit Object
-      │
-      ▼
-Interactive React Dashboard + PDF Export
+## Automated Webpage Scraper
+
+The system uses Cheerio with native Fetch to analyze publicly accessible webpages.
+
+The scraper extracts:
+
+- H1 headings
+- H2 headings
+- H3 headings
+- Page title
+- Meta description
+- Navigation links
+- Buttons
+- CTA text
+- Images
+- Image alt attributes
+- Forms
+- Input fields
+- Links
+- Structured JSON-LD data
+- Word count
+- Viewport configuration
+
+---
+
+## Shopify Intelligence
+
+The system automatically detects Shopify-based websites.
+
+It can identify signals such as:
+
+- Shopify platform usage
+- Product titles
+- Product pricing
+- Discounted pricing
+- Inventory availability
+- Product JSON
+- Shipping information
+- Trust badges
+- Product schema
+- Product availability
+
+---
+
+## CRO Scoring
+
+The system calculates a CRO score between **0 and 100**.
+
+The score is divided into five performance levels:
+
+| Score | Tier |
+|---|---|
+| 0–39 | Critical |
+| 40–59 | Needs Improvement |
+| 60–74 | Good |
+| 75–89 | Strong |
+| 90–100 | Excellent |
+
+The score is based on multiple conversion factors instead of a single metric.
+
+---
+
+## Six Conversion Pillars
+
+The application evaluates six major conversion pillars.
+
+### 1. Hero Section
+
+The system analyzes:
+
+- Headline clarity
+- Value proposition
+- Benefit communication
+- Above-the-fold messaging
+- Competitive differentiation
+- Supporting copy
+- Hero CTA
+
+---
+
+### 2. CTA Quality
+
+The system evaluates:
+
+- CTA visibility
+- CTA placement
+- CTA wording
+- CTA psychology
+- Primary versus secondary actions
+- Competing CTAs
+- Risk reduction near the CTA
+
+---
+
+### 3. Trust Signals
+
+The system checks for:
+
+- Reviews
+- Ratings
+- Testimonials
+- Guarantees
+- Security indicators
+- Social proof
+- Trust badges
+- Customer logos
+- Certifications
+
+---
+
+### 4. Product Page
+
+For product pages the system evaluates:
+
+- Product title
+- Product description
+- Product benefits
+- Pricing
+- Discount pricing
+- Pricing anchors
+- Product images
+- Product specifications
+- Availability
+- Shipping information
+- Return policy
+- Risk reversal
+
+---
+
+### 5. Mobile UX
+
+The system analyzes mobile-related structural signals including:
+
+- Viewport configuration
+- Content density
+- Button sizing signals
+- Page structure
+- Long content sections
+- Navigation complexity
+- Scroll depth indicators
+
+Mobile analysis is based on HTML and DOM signals rather than physical device rendering.
+
+---
+
+### 6. Copy Clarity
+
+The system evaluates:
+
+- Headline readability
+- Sentence complexity
+- Feature versus benefit messaging
+- Customer-focused language
+- Value proposition
+- Content hierarchy
+- Clarity of product messaging
+
+---
+
+# 3. Friction Point Detection
+
+The system identifies possible conversion friction points.
+
+Each friction point contains:
+
+- Title
+- Description
+- Severity
+- Element hint
+
+Severity levels:
+
+- High
+- Medium
+- Low
+
+Example:
+
+```json
+{
+  "title": "Deferred Social Proof",
+  "description": "Reviews are located below the second scroll fold.",
+  "severity": "high",
+  "elementHint": "Above-the-fold container"
+}
