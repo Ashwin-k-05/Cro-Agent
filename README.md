@@ -16,7 +16,7 @@
 | Resource | Link |
 |---|---|
 | 🌐 **Live Deployed App** | [https://cro-agent-indol.vercel.app/](https://cro-agent-indol.vercel.app/)  |
-| 🎥 **Demo Video Walkthrough** | [Watch Demo Video (Loom / YouTube)](https://your-video-link-here.com)  |
+| 🎥 **Demo Video Walkthrough** | [https://www.loom.com/share/02d9691682a94a47b49858c26c52f070](https://www.loom.com/share/02d9691682a94a47b49858c26c52f070)  |
 
 ## 1. Project Overview
 
